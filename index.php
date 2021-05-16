@@ -6,11 +6,10 @@ if ( isset($_POST['logout']) ) {
     return;
 }
 
-if ( isset($_POST['user']) && isset($_POST['pass']))//This writes user registration into a json file
+if ( isset($_POST['user']) && isset($_POST['pass']))
 { 
-        $file = fopen("register.php",'a');
-        $account = htmlentities($_POST['user'])." /n".
-            htmlentities($_POST['pass']);
+        $file = fopen("register.txt","a");
+        $account = htmlentities($_POST['user'])." ".htmlentities($_POST['pass'])."\n";
         fwrite($file, $account);
         fclose($file);
 }
@@ -19,7 +18,7 @@ if ( isset($_POST['user']) && isset($_POST['pass']))//This writes user registrat
 <html>
 <head><title>Dale Stmarthe</title></head><body>
 <a href="login.php">Please log in</a>
-echo<h1><strong>Register</strong></h1>
+<h1><strong>Register</strong></h1>
 <form method="post">
 <p>Username:
 <input type="text" name="user" size="40"></p>
@@ -35,5 +34,10 @@ if ( isset($_SESSION['error']) ) {
     echo('<p style="color: red;">'.htmlentities($_SESSION['error'])."</p>\n");
     unset($_SESSION['error']);
 }
+if ( isset($_SESSION['success']) ) {
+    echo('<p style="color: green;">'.htmlentities($_SESSION['success'])."</p>\n");
+    unset($_SESSION['success']);
+}
 ?>
+</body>
 </html>
